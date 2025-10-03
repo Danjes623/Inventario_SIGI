@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const path = require('path');
 const bcrypt = require('bcryptjs');
+const PORT = process.env.PORT || 3000;
+const HOST = "0.0.0.0"; // Escucha en todas las interfaces
 
 const app = express();
 app.use(express.json());
@@ -17,9 +19,10 @@ app.get('/', (req, res) => {
 });
 
 // Conectar a MongoDB
-mongoose.connect('mongodb://127.0.0.1:27017/InventarioP')
-  .then(() => console.log('✅ MongoDB conectado'))
-  .catch(err => console.error(err));
+mongoose
+  .connect("mongodb://10.9.221.33:27017/InventarioP")
+  .then(() => console.log("✅ MongoDB conectado"))
+  .catch((err) => console.error(err));
 
 // Modelo de Usuario (puedes crear esto en models/Usuario.js después)
 const usuarioSchema = new mongoose.Schema({
@@ -241,4 +244,8 @@ app.get('/api/auth/user/:id', async (req, res) => {
 app.use('/api/productos', require('./Routes/productos'));
 
 
-app.listen(3000, () => console.log('🚀 Servidor corriendo en http://localhost:3000'));
+app.listen(PORT, HOST, () => {
+  console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
+  console.log(`🌐 Accesible desde tu red local en: http://10.9.221.33:${PORT}`);
+  console.log(`📱 Otros dispositivos pueden usar esa IP para conectarse`);
+});
