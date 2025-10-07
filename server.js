@@ -20,10 +20,10 @@ app.get('/', (req, res) => {
 
 // Conectar a MongoDB
 mongoose
-  .connect("mongodb://10.9.221.33:27017/InventarioP")
+  .connect("mongodb://localhost:27017/InventarioP")
   .then(() => console.log("✅ MongoDB conectado"))
   .catch((err) => console.error(err));
-
+s
 // Modelo de Usuario (puedes crear esto en models/Usuario.js después)
 const usuarioSchema = new mongoose.Schema({
   name: { 
